@@ -15,7 +15,7 @@ test in assembly := {}
 target in assembly := file("package")
 
 assemblyJarName in assembly := {
-  name.value + "-" + gitCommit.value + ".jar"
+  name.value + "-" + version.value + "-" + gitCommit.value + ".jar"
 }
 
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = true)
