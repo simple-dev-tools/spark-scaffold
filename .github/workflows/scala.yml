@@ -40,8 +40,8 @@ jobs:
     - name: Package
       run: make build-spark-jar
     - name: Persist the Jar file
-        uses: actions/upload-artifact@v1
-        with:
-          name: fat-jar
-          path: package
+      uses: actions/upload-artifact@v1
+      with:
+        name: fat-jar
+        path: package
 
