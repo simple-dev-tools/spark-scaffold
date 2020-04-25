@@ -54,6 +54,7 @@ lazy val pipeline = (project in file("pipeline"))
   .dependsOn(framework % "test->test;compile->compile")
 
 ThisBuild / resolvers ++= Seq(
+  "Spark Packages Repo" at "http://dl.bintray.com/spark-packages/maven"
 )
 
 

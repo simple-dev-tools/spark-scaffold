@@ -87,10 +87,15 @@ object CsvJob extends Main[CsvJobParam] {
         .option("inferSchema","true")
         .load(argCsvPath)
 
+    val requiredColNames = Seq("name", "age")
+
+
     /**
-     * do Transformation
+     * do Transformation, and chaining them together
      */
-    val resultDF = csvDF.transform(addColumn(argColName, "value"))
+    val resultDF = csvDF
+        .transform(addColumn(argColName, "value"))
+        .transform(addColumn("another_col","great"))
 
 
     /**

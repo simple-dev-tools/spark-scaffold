@@ -21,4 +21,5 @@ object Modules {
   val avro = "org.apache.avro" % "avro" % "1.8.2" % Compile
   val avro4s = "com.sksamuel.avro4s" %% "avro4s-core" % "3.0.0-RC2" % Compile
   val doobieCore = "org.tpolecat" %% "doobie-core" % "0.8.0-RC1" % Compile
+
 }
