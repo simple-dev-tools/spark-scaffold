@@ -16,7 +16,7 @@ build-spark-jar: ## fat jar for cluster submission without provided dependencies
 	sbt 'pipeline/assembly'
 
 submit-job: build-spark-jar ## submit the example job to local
-	$(SPARK_SUBMIT) --master local --class $(MAIN_CLASS) $(JAR)  -e local -d false --p_dt 2020-03-09 --p_int 3 --p_string col3 --csv $(CSV_PATH)
+	$(SPARK_SUBMIT) --master local --class $(MAIN_CLASS) $(JAR) -e local -d false --csv $(CSV_PATH) -l 3
 
 clean: ## remove metastore_db and spark-warehouse folders
 	find . -path '*/metastore_db/*' -delete
