@@ -5,7 +5,6 @@ import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.{QueryTest, SparkSession}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, Suite}
-import java.sql.Date
 
 import com.log2.scaffold.config.AppConfig
 import com.log2.scaffold.constants.Env
@@ -62,18 +61,6 @@ trait ContextSuite extends QueryTest with BeforeAndAfterEach with BeforeAndAfter
       override def debug: Boolean = false
 
       override def debug_=(value: Boolean): Unit = ???
-
-      override def paramDate: Date = ???
-
-      override def paramDate_=(value: Date): Unit = ???
-
-      override def paramInt: Int = ???
-
-      override def paramInt_=(value: Int): Unit = ???
-
-      override def paramString: String = ???
-
-      override def paramString_=(value: String): Unit = ???
 
     }) {
       override def spark: SparkSession = getOrCreateSparkSession

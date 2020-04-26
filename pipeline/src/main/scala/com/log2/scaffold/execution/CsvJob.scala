@@ -20,6 +20,16 @@ object CsvJob extends Main[CsvJobParam] {
         }
         .text("The path of an csv file")
 
+      opt[Int]('l', "line")
+        .required()
+        .action {
+          (line, p) => p.copy(showLines = line)
+        }
+        .validate( line => if (line >= 1) { success } else {
+          failure(s"$line is not able to be used for show, it should >= 1")
+        })
+        .text("The path of an csv file")
+
     }.parse(args, CsvJobParam()).get
   }
 
@@ -60,16 +70,22 @@ object CsvJob extends Main[CsvJobParam] {
      */
     val spark = context.spark
     val argCsvPath = context.params.csvFilePath
+    val argDebug = context.params.debug
 
     /**
-     * Let's use the paramString as new column name
+     * Use the parameter from base [[Params]] trait
      */
-    val argColName = context.params.paramString
+    if (argDebug) {
+      logger.info("The debug model is ON")
+    } else {
+      logger.info("The debug model is OFF")
+    }
+
 
     /**
      * Let's use the paramInt as the number of rows to be show
      */
-    val argNumberToShow = context.params.paramInt
+    val argNumberToShow = context.params.showLines
 
     val hiveDbName = context.appConfig.getString("hive.dbname")
 
@@ -87,14 +103,12 @@ object CsvJob extends Main[CsvJobParam] {
         .option("inferSchema","true")
         .load(argCsvPath)
 
-    val requiredColNames = Seq("name", "age")
-
 
     /**
      * do Transformation, and chaining them together
      */
     val resultDF = csvDF
-        .transform(addColumn(argColName, "value"))
+        .transform(addColumn("new_col", "value"))
         .transform(addColumn("another_col","great"))
 
 
