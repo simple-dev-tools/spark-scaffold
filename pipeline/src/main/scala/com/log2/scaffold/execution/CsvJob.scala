@@ -1,7 +1,6 @@
 package com.log2.scaffold.execution
 
 import org.apache.spark.sql.SparkSession
-
 import com.log2.scaffold.utils.Transform.addColumn
 
 object CsvJob extends Main[CsvJobParam] {
@@ -18,6 +17,10 @@ object CsvJob extends Main[CsvJobParam] {
         .action {
           (csv_path, p) => p.copy(csvFilePath= csv_path)
         }
+        .validate(path =>
+          if (path.endsWith("csv")) { success } else {
+          failure("The csv path must ends with .csv and must exists")
+        })
         .text("The path of an csv file")
 
       opt[Int]('l', "line")

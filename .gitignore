@@ -1,5 +1,6 @@
 .classpath
 *.sublime-*
+metastore_db/
 *~
 .cache
 .idea
