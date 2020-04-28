@@ -17,6 +17,33 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Cache Maven
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/build.sbt') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-${{ hashFiles('**/build.sbt') }}
+          ${{ runner.os }}-maven
+          ${{ runner.os }}-
+    - name: Cache Ivy2
+      uses: actions/cache@v1
+      with:
+        path: ~/.ivy2/cache
+        key: ${{ runner.os }}-ivy2-${{ hashFiles('**/build.sbt') }}
+        restore-keys: |
+          ${{ runner.os }}-ivy2-${{ hashFiles('**/build.sbt') }}
+          ${{ runner.os }}-ivy2
+          ${{ runner.os }}-
+    - name: Cache SBT
+      uses: actions/cache@v1
+      with:
+        path: ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+        restore-keys: |
+          ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+          ${{ runner.os }}-sbt
+          ${{ runner.os }}-
     - name: Cache Coursier
       uses: actions/cache@v1
       with:
