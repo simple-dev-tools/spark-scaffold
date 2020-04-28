@@ -79,16 +79,4 @@ class BuiltinFunctionTest extends FlatSpec with Matchers with ContextSuite {
     df2.columns shouldBe Array("id","sum_n1","avg_n2")
 
   }
-
-  it should "correct for posexplode and posexplode_outer" in {
-    val spark = getOrCreateSparkSession
-    import spark.implicits._
-
-    val df = Seq(
-      (1,Array("How","are","you")),
-      (2,Array("How","are","you")),
-      (3,Array())
-    ).toDF("id","items")
-
-  }
 }
