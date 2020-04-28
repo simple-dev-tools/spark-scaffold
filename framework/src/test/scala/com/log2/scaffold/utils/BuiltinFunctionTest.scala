@@ -77,6 +77,32 @@ class BuiltinFunctionTest extends FlatSpec with Matchers with ContextSuite {
         avg("n2").alias("avg_n2") )
 
     df2.columns shouldBe Array("id","sum_n1","avg_n2")
+  }
 
+  it should "join on same column and drop one of it" in {
+    val spark = getOrCreateSparkSession
+    import spark.implicits._
+
+    val df1 = Seq(
+      (1,1),
+      (2,2)
+    ).toDF("id1","id2")
+
+    val df2 = Seq(
+      (3,1),
+      (2,2)
+    ).toDF("id2","id3")
+
+    val df3 = df1.join(df2, df1("id2") === df2("id2"), "left_outer").drop(df1("id2"))
+
+    df3.columns shouldBe Array("id1","id2","id3")
+
+    checkAnswer(
+      df3,
+      Seq(
+        Row(1,null,null),
+        Row(2,2,2)
+      )
+    )
   }
 }
