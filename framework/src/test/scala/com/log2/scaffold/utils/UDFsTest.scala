@@ -30,7 +30,6 @@ class UDFsTest extends FlatSpec with Matchers with ContextSuite {
       .withColumn("date", explode(col("range")))
       .drop("range")
 
-    df1.show()
 
     val expected = Seq(
       Row(startDate,endDate,startDate),
