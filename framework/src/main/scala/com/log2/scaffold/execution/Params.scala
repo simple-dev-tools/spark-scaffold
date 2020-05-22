@@ -10,9 +10,11 @@ trait Params {
 
   override def toString: String =
     s"""
+      |/n
       |env = $env
       |debug = $debug
       |additionalParams = ${super.toString}
+      |/n
       |""".stripMargin
 
 }
