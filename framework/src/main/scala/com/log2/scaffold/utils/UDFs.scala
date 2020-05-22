@@ -5,6 +5,12 @@ import java.time.Duration
 
 object UDFs {
 
+  /**
+   * accept two [[Date]] and return the range of start to end dates
+   * @param dateFrom
+   * @param dateTo
+   * @return [[Seq]]
+   */
   def getDateRange(dateFrom: Date, dateTo: Date ): Seq[Date] = {
     val daysBetween = Duration
       .between(
